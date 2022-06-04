@@ -57,12 +57,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Card.cs" />
-    <Compile Include="Assets\Scripts\FileReader.cs" />
-    <Compile Include="Assets\Scripts\ApiRequester.cs" />
     <Compile Include="Assets\Scripts\UI\RoomCreator.cs" />
-    <Compile Include="Assets\Scripts\LoadingScreenController.cs" />
     <Compile Include="Assets\Scripts\Events.cs" />
+    <Compile Include="Assets\Scripts\FileReader.cs" />
+    <Compile Include="Assets\Scripts\LoadingScreenController.cs" />
     <Compile Include="Assets\Scripts\CardLibrary.cs" />
+    <Compile Include="Assets\Scripts\ApiRequester.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Data\data_Shaman.txt" />

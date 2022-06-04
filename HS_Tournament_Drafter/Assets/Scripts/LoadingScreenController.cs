@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LoadingScreenController : MonoBehaviour
 {
@@ -11,6 +13,14 @@ public class LoadingScreenController : MonoBehaviour
         fileReader.CardsCreatedEvent.AddListener(CardLibrary.Instance.AddCardsToLibrary);
 
         apiRequester.RetrieveApiData();
-        CardLibrary.Instance.PrintLibrary();
+
+        StartCoroutine(LoadRoomCreationScene());
+    }
+
+    private IEnumerator LoadRoomCreationScene()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        SceneManager.LoadScene("RoomCreation");
     }
 }

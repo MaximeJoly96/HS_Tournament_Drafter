@@ -4,10 +4,14 @@ using UnityEngine.UI;
 
 public class RoomCreator : MonoBehaviour
 {
-    private List<string> _players;
+    private List<Player> _players;
 
     [SerializeField]
     private Button _addButton;
+    [SerializeField]
+    private InputField _inputField;
+    [SerializeField]
+    private Text _playersList;
 
     private void Awake()
     {
@@ -16,11 +20,21 @@ public class RoomCreator : MonoBehaviour
 
     private void Init()
     {
-        _players = new List<string>();
+        _players = new List<Player>();
+        _addButton.onClick.AddListener(AddCurrentPlayer);
     }
 
-    private void AddPlayer(string player)
+    public void AddPlayer(string player)
     {
-        _players.Add(player);
+        _players.Add(new Player(player));
+        _playersList.text += "\n" + player;
+    }
+
+    public void AddCurrentPlayer()
+    {
+        string content = _inputField.text;
+
+        if(content != "")
+            AddPlayer(content);
     }
 }
