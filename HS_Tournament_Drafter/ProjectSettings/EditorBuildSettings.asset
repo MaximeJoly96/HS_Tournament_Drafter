@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RoomCreation.unity
     guid: 6d48579fd80c3ac4e9ef276e70d9b4de
+  - enabled: 1
+    path: Assets/Scenes/Draft.unity
+    guid: adb9d856df4537b45a6f053e611f7ec1
   m_configObjects: {}

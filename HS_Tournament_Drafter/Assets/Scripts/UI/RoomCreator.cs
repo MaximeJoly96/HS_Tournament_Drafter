@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RoomCreator : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class RoomCreator : MonoBehaviour
 
     [SerializeField]
     private Button _addButton;
+    [SerializeField]
+    private Button _startDraftButton;
     [SerializeField]
     private InputField _inputField;
     [SerializeField]
@@ -22,6 +25,7 @@ public class RoomCreator : MonoBehaviour
     {
         _players = new List<Player>();
         _addButton.onClick.AddListener(AddCurrentPlayer);
+        _startDraftButton.onClick.AddListener(StartDraft);
     }
 
     public void AddPlayer(string player)
@@ -36,5 +40,11 @@ public class RoomCreator : MonoBehaviour
 
         if(content != "")
             AddPlayer(content);
+    }
+
+    public void StartDraft()
+    {
+        PlayersSingleton.Instance.AddPlayers(_players);
+        SceneManager.LoadScene("Draft");
     }
 }
