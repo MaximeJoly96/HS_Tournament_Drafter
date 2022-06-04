@@ -1,29 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class FileReader : MonoBehaviour
 {
     [SerializeField]
-    private TextAsset[] _classFiles;
+    private ApiRequester _apiRequester;
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        List<string> data = ReadAllClasses(_classFiles);
-
-        CreateCards(data);
+        _apiRequester.ApiRequestHasFinished.AddListener(ReceiveApiData);
     }
 
-    private List<string> ReadAllClasses(TextAsset[] data)
+    private void ReceiveApiData(List<string> data)
+    {
+        CreateCards(ReadAllClasses(data));
+    }
+
+    private List<string> ReadAllClasses(List<string> data)
     {
         List<string> output = new List<string>();
 
-        foreach(TextAsset file in data)
+        foreach(string file in data)
         {
-            output.AddRange(file.text.Split("cardId").ToList());
+            output.AddRange(file.Split("cardId").ToList());
         }
 
         return output;
@@ -70,5 +72,8 @@ public class FileReader : MonoBehaviour
                 cards.Add(newCard);
             } 
         }
+        Debug.Log(cards.Count);
+        foreach (Card c in cards)
+            Debug.Log(c);
     }
 }
