@@ -4,28 +4,21 @@ using System.Net.Http;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ApiRequestFinishedEvent : UnityEvent<List<string>> { }
-
-public class ApiRequester : MonoBehaviour
+public class ApiRequester
 {
-    private ApiRequestFinishedEvent _apiRequestHasFinished;
-    public ApiRequestFinishedEvent ApiRequestHasFinished
+    private StringsListEvent _apiRequestHasFinished;
+    public StringsListEvent ApiRequestHasFinished
     {
         get
         {
             if (_apiRequestHasFinished == null)
-                _apiRequestHasFinished = new ApiRequestFinishedEvent();
+                _apiRequestHasFinished = new StringsListEvent();
 
             return _apiRequestHasFinished;
         }
     }
 
-    private void Start()
-    {
-        RetrieveApiData();
-    }
-
-    private void RetrieveApiData()
+    public void RetrieveApiData()
     {
         string[] classes = new string[]
         {

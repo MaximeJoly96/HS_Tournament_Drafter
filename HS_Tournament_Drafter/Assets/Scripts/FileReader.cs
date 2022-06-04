@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class FileReader : MonoBehaviour
+public class FileReader
 {
-    [SerializeField]
-    private ApiRequester _apiRequester;
-
-    // Start is called before the first frame update
-    private void Awake()
+    private CardsListEvent _cardsCreatedEvent;
+    public CardsListEvent CardsCreatedEvent
     {
-        _apiRequester.ApiRequestHasFinished.AddListener(ReceiveApiData);
+        get
+        {
+            if (_cardsCreatedEvent == null)
+                _cardsCreatedEvent = new CardsListEvent();
+
+            return _cardsCreatedEvent;
+        }
     }
 
-    private void ReceiveApiData(List<string> data)
+    public void ReceiveApiData(List<string> data)
     {
         CreateCards(ReadAllClasses(data));
     }
@@ -72,8 +75,7 @@ public class FileReader : MonoBehaviour
                 cards.Add(newCard);
             } 
         }
-        Debug.Log(cards.Count);
-        foreach (Card c in cards)
-            Debug.Log(c);
+
+        CardsCreatedEvent.Invoke(cards);
     }
 }
